@@ -1,0 +1,6 @@
+1) Andare su start.spring.io e selezionare le seguenti dipendenze:
+ - MySQL Driver
+ - Spring Data JPA
+ - Spring Web
+ - lombok
+ - Spring Security
