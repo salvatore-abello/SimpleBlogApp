@@ -14,3 +14,5 @@
 
 - [ ] Realizzare il **frontend**
   - [ ] Boh
+
+- [ ] Admin panel ???????
