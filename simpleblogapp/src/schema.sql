@@ -25,7 +25,7 @@ CREATE TABLE Posts(
     FOREIGN KEY (CODTag) REFERENCES Tags(id)
 );
 
-CREATE TABLE TagsPosts(
+CREATE TABLE Tags_Posts(
     id int not null auto_increment PRIMARY KEY,
     CODTag int,
     CODPost int,

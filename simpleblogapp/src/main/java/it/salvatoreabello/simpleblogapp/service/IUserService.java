@@ -6,5 +6,7 @@ import java.util.List;
 
 
 public interface IUserService {
+    List<UserModel> getAll();
+    UserModel findById(Integer id);
     UserModel saveOrUpdate(UserModel entity);
 }

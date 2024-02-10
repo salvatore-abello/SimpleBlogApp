@@ -1,10 +1,13 @@
 package it.salvatoreabello.simpleblogapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity
+@Data
 @Table(name = "users")
 public class UserModel {
     @Id
@@ -13,9 +16,12 @@ public class UserModel {
 
     private String name;
     private String surname;
+    @JsonIgnore
     private String email;
+    @JsonIgnore
     private String password;
-    @OneToMany(mappedBy = "owner")
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<PostModel> posts;
 
     public int getId() {
@@ -58,11 +64,4 @@ public class UserModel {
         this.password = password;
     }
 
-    public List<PostModel> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<PostModel> posts) {
-        this.posts = posts;
-    }
 }

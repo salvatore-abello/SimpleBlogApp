@@ -1,8 +1,8 @@
- - Trovare un modo per escludere l'email e la password quando si fa un /api/posts (dal backend, non dal frontend)
- - Permettere agli utenti di registrarsi (/api/register)
+- Permettere agli utenti di registrarsi (/api/register)
     - Utilizzare bcrypt
- - Permettere agli utenti di loggarsi (/api/login)
-     - Utilizzare bcrypt
- - Seleziona i post in base al tag
- - Seleziona i postin base all'owner
- 
+- Permettere agli utenti di loggarsi (/api/login)
+    - Utilizzare bcrypt
+- Seleziona i post in base al tag
+
+DONE - Seleziona i post in base all'owner
+DONE - Trovare un modo per escludere l'email e la password quando si fa un /api/posts (dal backend, non dal frontend)

@@ -1,11 +1,17 @@
 package it.salvatoreabello.simpleblogapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Data
 @Table(name = "posts")
 public class PostModel {
     @Id
@@ -16,14 +22,16 @@ public class PostModel {
 
     @ManyToOne
     @JoinColumn(name = "CODOwner", referencedColumnName = "id")
+    @JsonIgnoreProperties({"posts"})
     private UserModel owner;
 
     @ManyToMany
     @JoinTable(
-            name="TagsPosts",
+            name="Tags_Posts",
             joinColumns = @JoinColumn(name = "CODPost"),
             inverseJoinColumns = @JoinColumn(name = "CODTag")
     )
+    @JsonIgnoreProperties({"posts"})
     private List<TagModel> tags;
 
     public int getId() {
