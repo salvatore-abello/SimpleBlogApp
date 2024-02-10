@@ -11,6 +11,7 @@
   - [ ] Possibilità di cambiare password
   - [ ] Creazione di un post
   - [ ] Endpoint raggiungibili solo dagli utenti loggati (o qualcos'altro? Tramite header o cookie? JWT????)
+  - [ ] Possibilità di switchare tra prod e dev
 
 - [ ] Realizzare il **frontend**
   - [ ] Boh
