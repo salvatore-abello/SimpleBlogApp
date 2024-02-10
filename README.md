@@ -10,7 +10,7 @@
   - [ ] Login
   - [ ] Possibilità di cambiare password
   - [ ] Creazione di un post
-  - [ ] Endpoint raggiungibili solo se si ha un cookie (o qualcos'altro? Tramite header o cookie? JWT????)
+  - [ ] Endpoint raggiungibili solo dagli utenti loggati (o qualcos'altro? Tramite header o cookie? JWT????)
 
 - [ ] Realizzare il **frontend**
   - [ ] Boh
