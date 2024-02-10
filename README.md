@@ -1,4 +1,4 @@
-# simpleblogapp
+# Simple Blog App
  Semplice blog realizzato utilizzando Spring e Angular
 
 ## TODO
