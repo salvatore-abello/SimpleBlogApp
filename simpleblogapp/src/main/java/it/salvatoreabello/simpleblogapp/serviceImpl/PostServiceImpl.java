@@ -1,6 +1,7 @@
 package it.salvatoreabello.simpleblogapp.serviceImpl;
 
 import it.salvatoreabello.simpleblogapp.model.PostModel;
+import it.salvatoreabello.simpleblogapp.model.TagModel;
 import it.salvatoreabello.simpleblogapp.repository.IPostRepository;
 import it.salvatoreabello.simpleblogapp.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;

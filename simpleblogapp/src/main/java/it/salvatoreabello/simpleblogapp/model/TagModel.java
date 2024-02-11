@@ -1,6 +1,7 @@
 package it.salvatoreabello.simpleblogapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,6 +20,7 @@ public class TagModel {
     private String tagname;
 
     @ManyToMany(mappedBy = "tags")
+    @JsonIgnoreProperties({"tags"})
     private List<PostModel> posts;
 
     public Integer getId() {

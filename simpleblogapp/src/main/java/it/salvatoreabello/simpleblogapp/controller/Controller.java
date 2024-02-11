@@ -4,17 +4,16 @@ import it.salvatoreabello.simpleblogapp.config.APIError;
 import it.salvatoreabello.simpleblogapp.config.APIResponse;
 import it.salvatoreabello.simpleblogapp.config.ErrorDetail;
 import it.salvatoreabello.simpleblogapp.model.PostModel;
+import it.salvatoreabello.simpleblogapp.model.TagModel;
 import it.salvatoreabello.simpleblogapp.model.UserModel;
 import it.salvatoreabello.simpleblogapp.service.IPostService;
+import it.salvatoreabello.simpleblogapp.service.ITagService;
 import it.salvatoreabello.simpleblogapp.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.Date;
@@ -27,6 +26,9 @@ public class Controller {
     private IPostService postService;
     @Autowired
     private IUserService userService;
+
+    @Autowired
+    private ITagService tagService;
 
     @GetMapping(value = {"/posts"}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<APIResponse<List<PostModel>>> getAllPosts(){
@@ -125,5 +127,4 @@ public class Controller {
             );
         }
     }
-
 }
