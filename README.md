@@ -5,7 +5,7 @@
 - [ ] Realizzare il **backend**
   - [x] Ottenere tutti i post e utenti
   - [x] Ottenere tutti i post di un determinato utente (post + informazioni sull'utente)
-  - [ ] Ottenere tutti i post con un determinato/i tag
+  - [x] Ottenere tutti i post con un determinato/i tag
   - [ ] Register
   - [ ] Login
   - [ ] Possibilità di cambiare password
