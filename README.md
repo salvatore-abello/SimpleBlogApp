@@ -6,7 +6,7 @@
   - [x] Ottenere tutti i post e utenti
   - [x] Ottenere tutti i post di un determinato utente (post + informazioni sull'utente)
   - [x] Ottenere tutti i post con un determinato/i tag
-  - [ ] Register
+  - [x] Register
   - [ ] Login
   - [ ] Possibilità di cambiare password
   - [ ] Creazione di un post
