@@ -23,6 +23,8 @@
      - [ ] Capire dove mettere il file `JWTUtil`
   - [ ] Possibilità di cambiare password
   - [ ] Creazione di un post
+  - [ ] Ottenere il singolo post dal suo ID
+  - [ ] Ricerca di una parola (o frase) nei post (found, not found)
   - [ ] Possibilità di switchare tra prod e dev
 
 - [ ] Realizzare il **frontend**
