@@ -64,7 +64,7 @@ public class SearchController {
                                                             ErrorDetail.builder()
                                                                     .code(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
                                                                     .field("generic")
-                                                                    .source("repository.findPostsByTagNames")
+                                                                    .source("repository.findByTagnameIn")
                                                                     .message(e.getMessage()).build()
                                                     )
                                             ).build()

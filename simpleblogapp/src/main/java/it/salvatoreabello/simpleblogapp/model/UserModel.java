@@ -1,8 +1,10 @@
 package it.salvatoreabello.simpleblogapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
 
@@ -12,16 +14,19 @@ import java.util.List;
 public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // @JsonIgnore
+    @JsonIgnore
     private int id;
 
     private String name;
     private String surname;
-    @JsonIgnore
+    // @JsonIgnore
     private String email;
-    @JsonIgnore
+    // @JsonIgnore
     private String password;
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<PostModel> posts;
 
     public int getId() {
@@ -61,7 +66,8 @@ public class UserModel {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        // Is this ok?
+        this.password = new BCryptPasswordEncoder().encode(password);
     }
 
 }

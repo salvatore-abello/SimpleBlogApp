@@ -20,15 +20,12 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = {"/api/"})
+@RequestMapping(value = {"/api"})
 public class Controller {
     @Autowired
     private IPostService postService;
     @Autowired
     private IUserService userService;
-
-    @Autowired
-    private ITagService tagService;
 
     @GetMapping(value = {"/posts"}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<APIResponse<List<PostModel>>> getAllPosts(){
