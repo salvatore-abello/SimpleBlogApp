@@ -5,7 +5,6 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import it.salvatoreabello.simpleblogapp.model.UserModel;
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.crypto.SecretKey;
 import java.security.MessageDigest;
@@ -18,8 +17,7 @@ public class JWTUtil {
     private final SecretKey key;
     private final Integer expirationHours;
 
-    public JWTUtil(@Value("${jwt.secret}") String secretKey,
-                          @Value("${jwt.expiration}") Integer exphours) {
+    public JWTUtil(String secretKey, Integer exphours) {
         // If the secret is too small we need to derive it (hmacShaKeyFor wants a minimum of 256 bits)
 
         MessageDigest digest = null;
@@ -29,7 +27,6 @@ public class JWTUtil {
             throw new RuntimeException(e);
         }
         byte[] hash = digest.digest(secretKey.getBytes());
-
         this.key = Keys.hmacShaKeyFor(hash);
         this.expirationHours = exphours;
     }

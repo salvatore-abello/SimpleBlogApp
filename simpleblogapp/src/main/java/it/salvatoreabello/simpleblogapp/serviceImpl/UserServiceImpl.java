@@ -1,12 +1,10 @@
 package it.salvatoreabello.simpleblogapp.serviceImpl;
 
-import io.jsonwebtoken.security.Password;
 import it.salvatoreabello.simpleblogapp.model.UserModel;
 import it.salvatoreabello.simpleblogapp.repository.IUserRepository;
 import it.salvatoreabello.simpleblogapp.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

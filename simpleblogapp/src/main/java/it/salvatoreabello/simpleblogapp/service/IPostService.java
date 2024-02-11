@@ -1,8 +1,6 @@
 package it.salvatoreabello.simpleblogapp.service;
 
 import it.salvatoreabello.simpleblogapp.model.PostModel;
-import it.salvatoreabello.simpleblogapp.model.TagModel;
-import it.salvatoreabello.simpleblogapp.model.UserModel;
 
 import java.util.List;
 

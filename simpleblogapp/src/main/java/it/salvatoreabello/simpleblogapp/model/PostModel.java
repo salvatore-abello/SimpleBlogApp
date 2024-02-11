@@ -1,13 +1,8 @@
 package it.salvatoreabello.simpleblogapp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
