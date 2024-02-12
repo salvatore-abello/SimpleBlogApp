@@ -8,6 +8,7 @@
   - [x] Ottenere tutti i post con un determinato/i tag
   - [x] Nascondere email, password e id dell'utente quando si fetchano i post
   - [x] Riscrivere tutto usando Mapper e DTO
+  - [x] Miglior risposta dal server in caso di exception (path dinamica + altro)
   - [x] Register
      - [x] **PASSWORD HASHATE NEL DATABASE (IMPORTANTISSIMO!1!1!1!1!)**
      - [x] Controllo di email duplicate
