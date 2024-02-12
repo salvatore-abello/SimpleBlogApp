@@ -14,7 +14,7 @@
      - [x] Controllo sulla lunghezza della password (min 6)
      - [x] Controllo che tutti i field esistano e non siano nulli
      - [x] Errori carini
-     - [ ] Mettere un controllo (regex????) sul nome e cognome???? (`[a-Z ]` ????)
+     - [ ] Mettere un controllo (regex????) sul nome e cognome???? (`[a-zA-Z ]` ????)
   - [x] Login
      - [x] Se il login è andato a buon fine, restituire un JWT
      - [x] Se il login non è andato a buon fine, dirlo all'utente
