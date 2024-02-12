@@ -6,6 +6,7 @@
   - [x] Ottenere tutti i post e utenti
   - [x] Ottenere tutti i post di un determinato utente (post + informazioni sull'utente)
   - [x] Ottenere tutti i post con un determinato/i tag
+  - [ ] Nascondere email, password e id dell'utente quando si fetchano i post
   - [x] Register
      - [x] **PASSWORD HASHATE NEL DATABASE (IMPORTANTISSIMO!1!1!1!1!)**
      - [x] Controllo di email duplicate
@@ -13,7 +14,7 @@
      - [x] Controllo sulla lunghezza della password (min 6)
      - [x] Controllo che tutti i field esistano e non siano nulli
      - [x] Errori carini
-     - [ ] Mettere un controllo (regex????) sul nome e cognome???? (`[a-Z ]` ????)
+     - [ ] Mettere un controllo (regex????) sul nome e cognome???? (`[a-zA-Z ]` ????)
   - [x] Login
      - [x] Se il login è andato a buon fine, restituire un JWT
      - [x] Se il login non è andato a buon fine, dirlo all'utente
@@ -23,6 +24,8 @@
      - [ ] Capire dove mettere il file `JWTUtil`
   - [ ] Possibilità di cambiare password
   - [ ] Creazione di un post
+  - [ ] Ottenere il singolo post dal suo ID
+  - [ ] Ricerca di una parola (o frase) nei post (found, not found)
   - [ ] Possibilità di switchare tra prod e dev
 
 - [ ] Realizzare il **frontend**
