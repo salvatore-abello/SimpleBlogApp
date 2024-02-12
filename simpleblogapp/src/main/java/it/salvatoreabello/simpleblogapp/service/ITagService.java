@@ -1,10 +1,9 @@
 package it.salvatoreabello.simpleblogapp.service;
 
-import it.salvatoreabello.simpleblogapp.model.TagModel;
-
+import it.salvatoreabello.simpleblogapp.dto.TagDTO;
 
 import java.util.List;
 
 public interface ITagService {
-    List<TagModel> findByTagnameIn(List<String> tagnames);
+    List<TagDTO> findByTagnameIn(List<String> tagnames);
 }

@@ -11,9 +11,7 @@ import java.io.IOException;
 
 public class JWTFilter implements Filter {
     // Thanks a lot <3 https://www.baeldung.com/spring-boot-add-filter
-
     private final JWTUtil jwt;
-
     public JWTFilter(JWTUtil jwt) {
         this.jwt = jwt;
     }
