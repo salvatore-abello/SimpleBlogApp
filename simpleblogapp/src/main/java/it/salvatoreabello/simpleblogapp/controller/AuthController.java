@@ -32,14 +32,11 @@ public class AuthController {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<APIResponse<UserModel>> handleValidationErrors(MethodArgumentNotValidException ex) {
-        List<String> errors = ex.getBindingResult().getFieldErrors()
-                .stream().map(FieldError::getDefaultMessage).toList();
-
         List<ErrorDetail> errorDetails = ex.getBindingResult().getFieldErrors()
                 .stream()
                 .map(fieldError -> ErrorDetail.builder()
                         .code(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
-                        .field("generic")
+                        .field(fieldError.getField())
                         .message(fieldError.getDefaultMessage())
                         .source("repository.saveOrUpdate")
                         .build())
@@ -92,7 +89,7 @@ public class AuthController {
                                                     Collections.singletonList(
                                                             ErrorDetail.builder()
                                                                     .code(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
-                                                                    .field("generic")
+                                                                    .field("email")
                                                                     .source("repository.saveOrUpdate()")
                                                                     .message("Email already exists").build()
                                                     )

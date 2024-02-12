@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,7 +24,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserModel {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     // @JsonIgnore
@@ -31,9 +31,11 @@ public class UserModel {
     private int id;
 
     @NotEmpty(message="Name cannot be empty")
+    @Pattern(regexp = "[a-zA-Z ]{4,32}")
     private String name;
 
     @NotEmpty(message="Surname cannot be empty")
+    @Pattern(regexp = "[a-zA-Z ]{4,32}")
     private String surname;
     // @JsonIgnore
     @Email(message = "Email is not valid")
