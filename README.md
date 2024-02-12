@@ -7,6 +7,7 @@
   - [x] Ottenere tutti i post di un determinato utente (post + informazioni sull'utente)
   - [x] Ottenere tutti i post con un determinato/i tag
   - [ ] Nascondere email, password e id dell'utente quando si fetchano i post
+  - [ ] Riscrivere tutto usando Mapper e DTO
   - [x] Register
      - [x] **PASSWORD HASHATE NEL DATABASE (IMPORTANTISSIMO!1!1!1!1!)**
      - [x] Controllo di email duplicate
