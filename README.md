@@ -6,8 +6,8 @@
   - [x] Ottenere tutti i post e utenti
   - [x] Ottenere tutti i post di un determinato utente (post + informazioni sull'utente)
   - [x] Ottenere tutti i post con un determinato/i tag
-  - [ ] Nascondere email, password e id dell'utente quando si fetchano i post
-  - [ ] Riscrivere tutto usando Mapper e DTO
+  - [x] Nascondere email, password e id dell'utente quando si fetchano i post
+  - [x] Riscrivere tutto usando Mapper e DTO
   - [x] Register
      - [x] **PASSWORD HASHATE NEL DATABASE (IMPORTANTISSIMO!1!1!1!1!)**
      - [x] Controllo di email duplicate
@@ -23,6 +23,11 @@
      - [x] JWT Secret e expiration date aggiunti ad `application.yaml`
      - [ ] Se il token è sbagliato, catchare l'exception e printarlo in modo carino
      - [ ] Capire dove mettere il file `JWTUtil`
+  - [ ] Creare n controller (da vedere):
+     - [ ] PostController
+     - [ ] AuthController
+     - [ ] UserController (?)
+     - [ ] TagController
   - [ ] Possibilità di cambiare password
   - [ ] Creazione di un post
   - [ ] Ottenere il singolo post dal suo ID
