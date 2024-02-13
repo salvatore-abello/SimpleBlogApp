@@ -29,7 +29,10 @@
      - [x] AuthController
      - [x] UserController
      - [x] TagController
-  - [x] Ottenere la lista di tutti i tag
+  - [x] Ricerca dei post. Se manca uno o più parametri di ricerca citati qua sotto, deve funzionare comunque
+     - [x] In base a uno o più tag
+     - [x] In base ad una stringa contenuta nel titolo e/o contenuto
+     - [x] In base all'owner del post
   - [x] Ottenere il singolo post dal suo ID
   - [x] Ricerca di una parola (o frase) nei post (found, not found)
   - [ ] Possibilità di cambiare password
