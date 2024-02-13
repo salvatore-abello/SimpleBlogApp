@@ -37,6 +37,7 @@
   - [x] Ricerca di una parola (o frase) nei post (found, not found)
   - [ ] Possibilità di cambiare password
   - [ ] Creazione di un post
+     - [ ] TANTI TANTI TANTI problemi con l'inserimento di un post (problema con i tag)
   - [ ] Possibilità di switchare tra prod e dev
   - [ ] **ABILITARE CSRF PROTECTION** (dopo aver finito il frontend)
 
