@@ -22,7 +22,7 @@
      - [x] Se il login non è andato a buon fine, dirlo all'utente
   - [x] Endpoint raggiungibili solo dagli utenti loggati (o qualcos'altro? Tramite header o cookie? JWT????
      - [x] JWT Secret e expiration date aggiunti ad `application.yaml`
-     - [ ] Se il token è sbagliato, catchare l'exception e printarlo in modo carino
+     - [x] Se il token è sbagliato, catchare l'exception e printarlo in modo carino
      - [ ] Capire dove mettere il file `JWTUtil`
   - [ ] Creare n controller (da vedere):
      - [ ] PostController
