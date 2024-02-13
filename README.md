@@ -42,5 +42,6 @@
   - [ ] Admin panel
   - [ ] Chi crea i tag? Probabilmente l'admin. Potrebbe essere carino implementare sta roba
   - [ ] Eliminare post? In base a cosa? Probabilmente no
+  - [ ] Docker?
 
 Probabilmente c'è roba che fa veramente schifo, questo è il mio primo esercizio con Java e Angular.
