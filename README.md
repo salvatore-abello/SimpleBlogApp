@@ -38,6 +38,7 @@
   - [ ] Possibilità di cambiare password
   - [ ] Creazione di un post
   - [ ] Possibilità di switchare tra prod e dev
+  - [ ] **ABILITARE CSRF PROTECTION** (dopo aver finito il frontend)
 
 - [ ] Realizzare il **frontend**
   - [ ] Boh, da decidere appena finisco il backend
