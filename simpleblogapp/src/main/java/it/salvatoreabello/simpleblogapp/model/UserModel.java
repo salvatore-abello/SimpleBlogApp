@@ -38,7 +38,7 @@ public class UserModel {
     @NotEmpty(message="Password cannot be empty")
     private String password;
 
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner")
     private List<PostModel> posts;
 
 }

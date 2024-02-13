@@ -16,3 +16,15 @@ server:
 jwt:
   secret: changeme
   expiration: 24 # Hours
+
+logging:
+  level:
+    org:
+      hibernate:
+        stat: debug
+        SQL_SLOW: info
+        SQL: debug
+        cache: debug
+        orm:
+          jdbc:
+            bind: trace

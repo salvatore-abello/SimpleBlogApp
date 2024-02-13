@@ -7,6 +7,7 @@ import it.salvatoreabello.simpleblogapp.config.APIResponse;
 import it.salvatoreabello.simpleblogapp.config.ErrorDetail;
 import it.salvatoreabello.simpleblogapp.dto.UserDTO;
 import jakarta.servlet.http.HttpServletRequest;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -20,7 +21,7 @@ import java.util.List;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler({ExpiredJwtException.class, MalformedJwtException.class})
+    @ExceptionHandler({ExpiredJwtException.class, MalformedJwtException.class}) // JWT exceptions
     protected ResponseEntity<APIResponse<UserDTO>> expiredHandler(HttpServletRequest request, Exception ex){
         StackTraceElement[] stackTrace = ex.getStackTrace();
 
@@ -77,7 +78,7 @@ public class GlobalExceptionHandler {
         );
     }
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(Exception.class) // Generic handler
     protected ResponseEntity<APIResponse<Object>> genericExceptionHandler(HttpServletRequest request, Exception ex) {
         StackTraceElement[] stackTrace = ex.getStackTrace();
 

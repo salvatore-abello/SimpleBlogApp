@@ -29,7 +29,6 @@ public class JWTFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-
         try {
             // Apply filter to all endpoints except /api/auth
             if(request.getRequestURI().startsWith("/api/auth")){
@@ -37,7 +36,7 @@ public class JWTFilter implements Filter {
                 return;
             }
 
-            String jwtToken = extractJwtToken(request);
+            String jwtToken = jwt.extractJwtToken(request);
 
             if (!StringUtils.hasText(jwtToken) || jwt.getJWT(jwtToken) == null)
                 throw new JwtException("Unauthorized");
@@ -48,11 +47,4 @@ public class JWTFilter implements Filter {
         }
     }
 
-    private String extractJwtToken(HttpServletRequest request) {
-        String authHeader = request.getHeader("Authorization");
-        if (StringUtils.hasText(authHeader) && authHeader.startsWith("Bearer ")) {
-            return authHeader.split(" ")[1];
-        }
-        return null;
-    }
 }

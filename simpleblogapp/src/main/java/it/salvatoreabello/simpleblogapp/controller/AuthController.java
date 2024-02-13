@@ -98,7 +98,8 @@ public class AuthController {
                     .returnedObjects(1)
                     .totalObjects(1)
                     .payload(jwt.createJWT(UserModel.builder()
-                            .email(fromReq.getEmail())
+                            .id(fromDb.getId())
+                            .email(fromDb.getEmail())
                             .build())).build();
         }else{
             builder

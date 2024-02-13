@@ -2,15 +2,17 @@ package it.salvatoreabello.simpleblogapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.Data;
+import lombok.*;
+
 import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "tags")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class TagModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

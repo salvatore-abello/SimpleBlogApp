@@ -1,14 +1,23 @@
 package it.salvatoreabello.simpleblogapp.serviceImpl;
 
 import it.salvatoreabello.simpleblogapp.dto.PostDTO;
+import it.salvatoreabello.simpleblogapp.dto.TagDTO;
+import it.salvatoreabello.simpleblogapp.dto.UserDTO;
 import it.salvatoreabello.simpleblogapp.model.PostModel;
+import it.salvatoreabello.simpleblogapp.model.TagModel;
+import it.salvatoreabello.simpleblogapp.model.UserModel;
 import it.salvatoreabello.simpleblogapp.repository.IPostRepository;
+import it.salvatoreabello.simpleblogapp.repository.ITagRepository;
 import it.salvatoreabello.simpleblogapp.service.IPostService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.internal.bytebuddy.description.modifier.Ownership;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,6 +29,12 @@ public class PostServiceImpl implements IPostService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private ITagRepository tagRepository;
+
+    @PersistenceContext
+    EntityManager entityManager;
 
     @Override
     public PostDTO findById(Integer id) {
@@ -37,13 +52,39 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
-    public PostModel saveOrUpdate(PostModel entity) {
-        return repository.save(entity);
+    public List<PostModel> findByTagnameIn(List<String> tags){
+        return repository.findByTagsTagnameIn(tags);
     }
 
     @Override
-    public List<PostModel> findByTagnameIn(List<String> tags){
-        return repository.findByTagsTagnameIn(tags);
+    public PostDTO saveOrUpdate(PostDTO post) {
+        // I don't like this method
+        // THANKS I LOVE YOU SO MUCH https://www.youtube.com/watch?v=kzsGuDcAGkE
+
+        PostModel newPost = PostModel.builder()
+                .title(post.getTitle())
+                .content(post.getContent())
+                .owner(UserModel.builder().id(1).build())
+                .tags(new ArrayList<>())
+                .build();
+
+
+        newPost.getTags().addAll(
+                post.getTags().stream().map(
+                        t -> {
+                            Optional<TagModel> tagOptional = tagRepository.findById(t.getId());
+                            TagModel tt = tagOptional.get(); // Add some kind of validation here
+                            tt.getPosts().add(newPost);
+                            return tt;
+                        }
+                ).toList()
+        );
+
+
+
+        PostModel savedPost = repository.save(newPost);
+
+        return modelMapper.map(savedPost, PostDTO.class);
     }
 
     @Override
