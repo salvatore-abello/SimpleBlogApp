@@ -25,10 +25,10 @@
      - [x] Se il token è sbagliato, catchare l'exception e printarlo in modo carino
      - [ ] Capire dove mettere il file `JWTUtil`
   - [ ] Creare n controller (da vedere):
-     - [ ] PostController
-     - [ ] AuthController
-     - [ ] UserController (?)
-     - [ ] TagController
+     - [x] PostController
+     - [x] AuthController
+     - [x] UserController
+     - [ ] TagController (?)
   - [ ] Possibilità di cambiare password
   - [ ] Creazione di un post
   - [ ] Ottenere il singolo post dal suo ID
