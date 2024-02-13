@@ -12,7 +12,6 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-@Data
 @Table(name = "users")
 @Builder
 @AllArgsConstructor

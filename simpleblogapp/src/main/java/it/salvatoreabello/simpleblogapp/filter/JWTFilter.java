@@ -2,16 +2,13 @@ package it.salvatoreabello.simpleblogapp.filter;
 
 import io.jsonwebtoken.JwtException;
 import it.salvatoreabello.simpleblogapp.config.JWTUtil;
-import it.salvatoreabello.simpleblogapp.controller.GlobalExceptionHandler;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
-import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.io.IOException;

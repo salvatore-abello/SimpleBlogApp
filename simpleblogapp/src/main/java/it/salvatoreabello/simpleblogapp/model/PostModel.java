@@ -10,7 +10,6 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-@Data
 @Table(name = "posts")
 public class PostModel {
     @Id

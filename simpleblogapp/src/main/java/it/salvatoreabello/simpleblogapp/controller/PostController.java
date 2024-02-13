@@ -2,11 +2,7 @@ package it.salvatoreabello.simpleblogapp.controller;
 
 import it.salvatoreabello.simpleblogapp.config.APIResponse;
 import it.salvatoreabello.simpleblogapp.dto.PostDTO;
-import it.salvatoreabello.simpleblogapp.dto.TagDTO;
-import it.salvatoreabello.simpleblogapp.dto.UserDTO;
-import it.salvatoreabello.simpleblogapp.model.TagModel;
 import it.salvatoreabello.simpleblogapp.service.IPostService;
-import it.salvatoreabello.simpleblogapp.service.ITagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -79,10 +75,11 @@ public class PostController {
     public ResponseEntity<APIResponse<List<PostDTO>>> searchPosts(
     @RequestParam(value = "tags", required = false) List<String> tags,
     @RequestParam(value = "content", required = false) String content,
-    @RequestParam(value = "title", required = false) String title){
+    @RequestParam(value = "title", required = false) String title,
+    @RequestParam(value = "ownerid", required = false) Integer ownerId){
     APIResponse.APIResponseBuilder<List<PostDTO>> builder = APIResponse.builder();
 
-        List<PostDTO> fetchedPosts = postService.searchPosts(tags, content, title);
+        List<PostDTO> fetchedPosts = postService.searchPosts(tags, content, title, ownerId);
         builder.statusCode(HttpStatus.OK.value());
 
         if(!fetchedPosts.isEmpty()){

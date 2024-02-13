@@ -10,7 +10,6 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Data
 @Table(name = "tags")
 public class TagModel {
     @Id

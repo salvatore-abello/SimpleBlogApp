@@ -1,14 +1,9 @@
 package it.salvatoreabello.simpleblogapp.serviceImpl;
 
 import it.salvatoreabello.simpleblogapp.dto.PostDTO;
-import it.salvatoreabello.simpleblogapp.dto.TagDTO;
-import it.salvatoreabello.simpleblogapp.dto.UserDTO;
 import it.salvatoreabello.simpleblogapp.model.PostModel;
-import it.salvatoreabello.simpleblogapp.model.UserModel;
 import it.salvatoreabello.simpleblogapp.repository.IPostRepository;
-import it.salvatoreabello.simpleblogapp.repository.ITagRepository;
 import it.salvatoreabello.simpleblogapp.service.IPostService;
-import it.salvatoreabello.simpleblogapp.service.ITagService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -22,9 +17,6 @@ import java.util.stream.Collectors;
 public class PostServiceImpl implements IPostService {
     @Autowired
     private IPostRepository repository;
-
-    @Autowired
-    private ITagRepository tagRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -51,32 +43,16 @@ public class PostServiceImpl implements IPostService {
 
     @Override
     public List<PostModel> findByTagnameIn(List<String> tags){
-        return repository.findByTags_TagnameIn(tags);
+        return repository.findByTagsTagnameIn(tags);
     }
 
     @Override
-    public List<PostDTO> searchPosts(List<String> tags, String content, String title){
-        // if tags == null, fetch all posts, else, filter all posts by the given tags
-        List<PostDTO> fetchedPosts =  (tags == null
-                ? repository.findAll(Sort.by(Sort.Order.desc("title")))
-                : repository.findByTags_TagnameIn(tags))
+    public List<PostDTO> searchPosts(List<String> tags, String content,
+                                     String title,
+                                     Integer ownerId){
+        return repository.findByTagsTagnameInAndOwnerIdAndContentAndTitle(content, title, tags, ownerId)
                 .stream()
                 .map(m -> modelMapper.map(m, PostDTO.class))
                 .toList();
-
-        if (content != null && !content.isEmpty()) {
-            fetchedPosts = fetchedPosts.stream()
-                    .filter(p -> p.getContent().contains(content))
-                    .toList();
-        }
-
-        if (title != null && !title.isEmpty()) {
-            fetchedPosts = fetchedPosts.stream()
-                    .filter(p -> p.getTitle().contains(title))
-                    .toList();
-        }
-
-
-        return fetchedPosts;
     }
 }
