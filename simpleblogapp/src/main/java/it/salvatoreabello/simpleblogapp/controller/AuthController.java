@@ -30,33 +30,6 @@ public class AuthController {
     @Autowired
     JWTUtil jwt;
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<APIResponse<UserDTO>> handleConflict(MethodArgumentNotValidException ex) {
-        List<ErrorDetail> errorDetails = ex.getBindingResult().getFieldErrors()
-                .stream()
-                .map(fieldError -> ErrorDetail.builder()
-                        .code(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()))
-                        .field(fieldError.getField())
-                        .message(fieldError.getDefaultMessage())
-                        .source("repository.saveOrUpdate")
-                        .build())
-                .toList();
-
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-                APIResponse.<UserDTO>builder()
-                        .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                        .statusMessage("Internal server error while registering user")
-                        .returnedObjects(0)
-                        .totalObjects(0)
-                        .errors(
-                                APIError.builder()
-                                        .path("/api/auth/register")
-                                        .timestamp(new Date())
-                                        .details(errorDetails).build()
-                        ).build()
-        );
-    }
-
     @PostMapping(value = "/register",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})

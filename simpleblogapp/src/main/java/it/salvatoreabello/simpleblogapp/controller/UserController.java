@@ -1,50 +1,23 @@
 package it.salvatoreabello.simpleblogapp.controller;
 
 import it.salvatoreabello.simpleblogapp.config.APIResponse;
-import it.salvatoreabello.simpleblogapp.dto.PostDTO;
 import it.salvatoreabello.simpleblogapp.dto.UserDTO;
-import it.salvatoreabello.simpleblogapp.service.IPostService;
 import it.salvatoreabello.simpleblogapp.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = {"/api"})
-public class Controller {
-    @Autowired
-    private IPostService postService;
+@RequestMapping(value = {"/api/users"})
+public class UserController {
     @Autowired
     private IUserService userService;
 
-    @GetMapping(value = {"/posts"}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<APIResponse<List<PostDTO>>> getAllPosts(){
-        APIResponse.APIResponseBuilder<List<PostDTO>> builder = APIResponse.builder();
-        List<PostDTO> posts = postService.getAll();
-        builder.statusCode(HttpStatus.OK.value());
-
-        if(!posts.isEmpty()){
-            builder
-                    .statusMessage("Posts fetched correctly!")
-                    .totalObjects(posts.size())
-                    .returnedObjects(posts.size())
-                    .payload(posts);
-
-        }else{
-            builder
-                    .statusMessage("No posts found")
-                    .totalObjects(0)
-                    .returnedObjects(0);
-        }
-
-        APIResponse<List<PostDTO>> response = builder.build();
-
-        return ResponseEntity.status(HttpStatus.OK).body(response);
-    }
     @GetMapping(value = {"/user/{id}"}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<APIResponse<UserDTO>> getUser(@PathVariable Integer id){
         APIResponse.APIResponseBuilder<UserDTO> builder = APIResponse.builder();
