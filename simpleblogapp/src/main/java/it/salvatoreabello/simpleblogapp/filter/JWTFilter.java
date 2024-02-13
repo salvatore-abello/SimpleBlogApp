@@ -32,7 +32,14 @@ public class JWTFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
+
         try {
+            // Apply filter to all endpoints except /api/auth
+            if(request.getRequestURI().startsWith("/api/auth")){
+                filterChain.doFilter(request, response);
+                return;
+            }
+
             String jwtToken = extractJwtToken(request);
 
             if (!StringUtils.hasText(jwtToken) || jwt.getJWT(jwtToken) == null)

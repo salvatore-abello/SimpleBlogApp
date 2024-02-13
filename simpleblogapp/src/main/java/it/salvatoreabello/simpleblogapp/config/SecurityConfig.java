@@ -35,7 +35,7 @@ public class SecurityConfig {
     public FilterRegistrationBean<JWTFilter> logFilter(JWTFilter jwtfilter) {
         FilterRegistrationBean<JWTFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(jwtfilter);
-        registrationBean.addUrlPatterns("/api/posts/*");
+        // registrationBean.addUrlPatterns(""); :(
         registrationBean.setOrder(1);
         return registrationBean;
     }

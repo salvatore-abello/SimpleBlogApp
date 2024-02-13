@@ -3,6 +3,7 @@ package it.salvatoreabello.simpleblogapp.controller;
 import it.salvatoreabello.simpleblogapp.config.APIResponse;
 import it.salvatoreabello.simpleblogapp.dto.PostDTO;
 import it.salvatoreabello.simpleblogapp.dto.TagDTO;
+import it.salvatoreabello.simpleblogapp.model.TagModel;
 import it.salvatoreabello.simpleblogapp.service.IPostService;
 import it.salvatoreabello.simpleblogapp.service.ITagService;
 import org.springframework.beans.factory.annotation.Autowired;
