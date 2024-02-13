@@ -3,6 +3,7 @@ package it.salvatoreabello.simpleblogapp.controller;
 import it.salvatoreabello.simpleblogapp.config.APIResponse;
 import it.salvatoreabello.simpleblogapp.dto.PostDTO;
 import it.salvatoreabello.simpleblogapp.dto.TagDTO;
+import it.salvatoreabello.simpleblogapp.dto.UserDTO;
 import it.salvatoreabello.simpleblogapp.model.TagModel;
 import it.salvatoreabello.simpleblogapp.service.IPostService;
 import it.salvatoreabello.simpleblogapp.service.ITagService;
@@ -10,19 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/posts")
 public class PostController {
-
-    @Autowired
-    private ITagService tagService;
 
     @Autowired
     private IPostService postService;
@@ -52,11 +47,42 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @GetMapping(value = {"/tags"}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<APIResponse<List<TagDTO>>> searchPostsByTags(@RequestParam("tags") List<String> tags){
-        APIResponse.APIResponseBuilder<List<TagDTO>> builder = APIResponse.builder();
+    @GetMapping(value = {"/post/{id}"}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<APIResponse<PostDTO>> getPost(@PathVariable Integer id){
+        APIResponse.APIResponseBuilder<PostDTO> builder = APIResponse.builder();
 
-        List<TagDTO> fetchedPosts = tagService.findByTagnameIn(tags);
+        PostDTO fetchedPost = postService.findById(id);
+
+        builder.statusCode(HttpStatus.OK.value());
+
+        if(fetchedPost != null){
+            builder
+                    .statusMessage("Post fetched correctly!")
+                    .totalObjects(1)
+                    .returnedObjects(1)
+                    .payload(fetchedPost);
+        }else{
+            builder
+                    .statusMessage("No user found with the given id")
+                    .totalObjects(0)
+                    .returnedObjects(0);
+        }
+
+        APIResponse<PostDTO> response = builder.build();
+
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    // + owner?
+    @GetMapping(value = {"/search"}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<APIResponse<List<PostDTO>>> searchPosts(
+    @RequestParam(value = "tags", required = false) List<String> tags,
+    @RequestParam(value = "content", required = false) String content,
+    @RequestParam(value = "title", required = false) String title){
+    APIResponse.APIResponseBuilder<List<PostDTO>> builder = APIResponse.builder();
+
+        List<PostDTO> fetchedPosts = postService.searchPosts(tags, content, title);
         builder.statusCode(HttpStatus.OK.value());
 
         if(!fetchedPosts.isEmpty()){
@@ -68,12 +94,12 @@ public class PostController {
 
         }else{
             builder
-                    .statusMessage("No post found with the given tag(s)")
+                    .statusMessage("No post found with the given filter(s)")
                     .totalObjects(0)
                     .returnedObjects(0);
         }
 
-        APIResponse<List<TagDTO>> response = builder.build();
+        APIResponse<List<PostDTO>> response = builder.build();
 
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }

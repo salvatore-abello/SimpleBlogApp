@@ -11,5 +11,4 @@ import java.util.List;
 
 @Repository
 public interface ITagRepository extends JpaRepository<TagModel, Integer> {
-    List<TagModel> findByTagnameIn(@Param("tagnames") List<String> tagnames);
 }

@@ -6,6 +6,5 @@ import it.salvatoreabello.simpleblogapp.model.TagModel;
 import java.util.List;
 
 public interface ITagService {
-    List<TagDTO> findByTagnameIn(List<String> tagnames);
     List<TagDTO> getAll();
 }

@@ -21,14 +21,6 @@ public class TagServiceImpl implements ITagService {
     private ModelMapper modelMapper;
 
     @Override
-    public List<TagDTO> findByTagnameIn(List<String> tags){
-        return repository.findByTagnameIn(tags)
-                .stream()
-                .map(m -> modelMapper.map(m, TagDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public List<TagDTO> getAll(){ // is this ok?
         return repository.findAll(Sort.by(Sort.Order.desc("id")))
                 .stream()
