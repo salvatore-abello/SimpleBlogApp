@@ -24,11 +24,12 @@
      - [x] JWT Secret e expiration date aggiunti ad `application.yaml`
      - [x] Se il token è sbagliato, catchare l'exception e printarlo in modo carino
      - [ ] Capire dove mettere il file `JWTUtil`
-  - [ ] Creare n controller (da vedere):
+  - [x] Creare controller
      - [x] PostController
      - [x] AuthController
      - [x] UserController
-     - [ ] TagController (?)
+     - [x] TagController
+  - [x] Ottenere la lista di tutti i tag
   - [ ] Possibilità di cambiare password
   - [ ] Creazione di un post
   - [ ] Ottenere il singolo post dal suo ID
