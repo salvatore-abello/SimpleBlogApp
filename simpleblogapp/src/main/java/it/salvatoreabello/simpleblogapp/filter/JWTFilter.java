@@ -1,35 +1,47 @@
 package it.salvatoreabello.simpleblogapp.filter;
 
+import io.jsonwebtoken.JwtException;
 import it.salvatoreabello.simpleblogapp.config.JWTUtil;
+import it.salvatoreabello.simpleblogapp.controller.GlobalExceptionHandler;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.servlet.HandlerExceptionResolver;
+
 import java.io.IOException;
 
 
+@Component
 public class JWTFilter implements Filter {
     // Thanks a lot <3 https://www.baeldung.com/spring-boot-add-filter
-    private final JWTUtil jwt;
-    public JWTFilter(JWTUtil jwt) {
-        this.jwt = jwt;
-    }
+    @Autowired
+    @Qualifier("handlerExceptionResolver")
+    private HandlerExceptionResolver resolver;
+
+    @Autowired
+    private JWTUtil jwt;
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        String jwtToken = extractJwtToken(request);
+        try {
+            String jwtToken = extractJwtToken(request);
 
-        if (StringUtils.hasText(jwtToken) && jwt.getJWT(jwtToken) != null) {
+            if (!StringUtils.hasText(jwtToken) || jwt.getJWT(jwtToken) == null)
+                throw new JwtException("Unauthorized");
+
             filterChain.doFilter(request, response);
-            return;
+        } catch (Exception e) {
+            resolver.resolveException(request, response, null, e);
         }
-
-        response.setStatus(HttpStatus.UNAUTHORIZED.value());
-        response.getWriter().write("Unauthorized");
     }
 
     private String extractJwtToken(HttpServletRequest request) {

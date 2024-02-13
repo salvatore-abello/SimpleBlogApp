@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan(basePackages = {"it.salvatoreabello.simpleblogapp.controller"})
+@ComponentScan({"it.salvatoreabello"})
 public class WebConfig implements WebMvcConfigurer {
     // Dare la possibilità a determinati URL di accedere al controller
 

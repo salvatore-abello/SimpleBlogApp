@@ -19,7 +19,6 @@ public class JWTUtil {
 
     public JWTUtil(String secretKey, Integer exphours) {
         // If the secret is too small we need to derive it (hmacShaKeyFor wants a minimum of 256 bits)
-
         MessageDigest digest = null;
         try {
             digest = MessageDigest.getInstance("SHA-256");
@@ -47,8 +46,6 @@ public class JWTUtil {
                 .verifyWith(key)
                 .build()
                 .parseSignedClaims(jwtString);
-
-        System.out.println(jws.getPayload().getSubject());
 
         return jws.getPayload().getSubject();
     }

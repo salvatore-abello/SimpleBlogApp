@@ -1,6 +1,7 @@
 package it.salvatoreabello.simpleblogapp.config;
 
 import it.salvatoreabello.simpleblogapp.filter.JWTFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -30,9 +31,10 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
     @Bean
-    public FilterRegistrationBean<JWTFilter> logFilter(JWTUtil jwtUtil) {
+    @Autowired
+    public FilterRegistrationBean<JWTFilter> logFilter(JWTFilter jwtfilter) {
         FilterRegistrationBean<JWTFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new JWTFilter(jwtUtil));
+        registrationBean.setFilter(jwtfilter);
         registrationBean.addUrlPatterns("/api/search/*");
         registrationBean.setOrder(1);
         return registrationBean;
