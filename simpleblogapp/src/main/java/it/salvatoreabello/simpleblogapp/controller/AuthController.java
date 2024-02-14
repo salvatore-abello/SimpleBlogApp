@@ -73,11 +73,11 @@ public class AuthController {
     @PostMapping(value = "/login",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<APIResponse<String>> loginUser(@RequestBody Map<String, String> json){
+    public ResponseEntity<APIResponse<String>> loginUser(@RequestBody Map<String, Object> json){
         APIResponse.APIResponseBuilder<String>builder = APIResponse.builder();
 
-        String email = json.get("email");
-        String password = json.get("password");
+        String email = (String) json.get("email");
+        String password = (String) json.get("password");
 
         UserModel fromDb = userService.findByEmail(email);
         UserModel fromReq = UserModel.builder()
@@ -99,8 +99,9 @@ public class AuthController {
                     .totalObjects(1)
                     .payload(jwt.createJWT(UserModel.builder()
                             .id(fromDb.getId())
-                            .email(fromDb.getEmail())
-                            .build())).build();
+                                    .name(fromDb.getName())
+                                    .surname(fromDb.getSurname())
+                                    .email(fromDb.getEmail()).build())).build();
         }else{
             builder
                     .statusCode(HttpStatus.FORBIDDEN.value())

@@ -11,5 +11,5 @@ public interface IPostService {
     List<PostDTO> getAll();
     List<PostDTO> searchPosts(List<String> tags, String content, String title, Integer ownerId);
     List<PostModel> findByTagnameIn(List<String> tagnames);
-    PostDTO saveOrUpdate(PostDTO post);
+    PostDTO saveOrUpdate(PostDTO post) throws Exception;
 }

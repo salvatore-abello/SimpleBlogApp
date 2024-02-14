@@ -3,7 +3,6 @@ package it.salvatoreabello.simpleblogapp.controller;
 import it.salvatoreabello.simpleblogapp.config.APIResponse;
 import it.salvatoreabello.simpleblogapp.config.JWTUtil;
 import it.salvatoreabello.simpleblogapp.dto.PostDTO;
-import it.salvatoreabello.simpleblogapp.dto.UserDTO;
 import it.salvatoreabello.simpleblogapp.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

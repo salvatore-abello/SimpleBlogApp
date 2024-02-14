@@ -6,8 +6,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import it.salvatoreabello.simpleblogapp.model.UserModel;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -19,6 +17,8 @@ import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class JWTUtil {
     private final SecretKey key;
@@ -37,11 +37,20 @@ public class JWTUtil {
         this.expirationHours = exphours;
     }
 
-    public Integer getCurrentUser() throws Exception {
+    public UserModel getCurrentUser() throws Exception {
         RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
         if (requestAttributes instanceof ServletRequestAttributes) {
             HttpServletRequest request = ((ServletRequestAttributes) requestAttributes).getRequest();
-            return Integer.valueOf(this.getJWT(extractJwtToken(request)));
+            Claims c = this.getJWT(extractJwtToken(request));
+
+            LinkedHashMap<String, Object> map =
+                    (LinkedHashMap<String, Object>) c.get("user"); // Maybe add a check?
+
+            return UserModel.builder()
+                    .id(Integer.parseInt(c.getSubject()))
+                    .name((String)map.get("name"))
+                    .surname((String)map.get("surname"))
+                    .build();
         }
         throw new Exception("Not called in the context of an HTTP request");
     }
@@ -51,19 +60,20 @@ public class JWTUtil {
         Instant expirationTime = now.plus(this.expirationHours, ChronoUnit.HOURS);
         return Jwts.builder()
                 .subject(String.valueOf(entity.getId()))
+                .claim("user", entity)
                 .expiration(Date.from(expirationTime))
                 .issuedAt(Date.from(now))
                 .signWith(key)
                 .compact();
     }
 
-    public String getJWT(String jwtString){
+    public Claims getJWT(String jwtString){
         Jws<Claims> jws = Jwts.parser()
                 .verifyWith(key)
                 .build()
                 .parseSignedClaims(jwtString);
 
-        return jws.getPayload().getSubject();
+        return jws.getPayload();
     }
 
     public String extractJwtToken(HttpServletRequest request) {
