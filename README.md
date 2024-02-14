@@ -41,6 +41,7 @@
      - [x] Aggiungere qualcosa per cacheare le tag (non cambiano, quindi che senso ha prenderle di continuo dal db?)
   - [ ] Possibilità di switchare tra prod e dev
   - [ ] **ABILITARE CSRF PROTECTION** (dopo aver finito il frontend)
+  - [ ] **Fase di testing**
 
 - [ ] Realizzare il **frontend**
   - [ ] Boh, da decidere appena finisco il backend
