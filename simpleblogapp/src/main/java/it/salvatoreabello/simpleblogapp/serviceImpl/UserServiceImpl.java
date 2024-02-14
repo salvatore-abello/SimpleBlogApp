@@ -56,7 +56,7 @@ public class UserServiceImpl implements IUserService {
             BindingResult bindingResult = new BeanPropertyBindingResult(entity, "password");
             bindingResult.rejectValue("password", "length", "Password must be at least 6 characters long");
 
-            try { // Exception usually thrown when a field is invalid.
+            try { // Exception is usually thrown when a field is invalid.
                 throw new MethodArgumentNotValidException(
                         new MethodParameter(
                                 this.getClass().getMethod("setEncodedPassword", UserModel.class),

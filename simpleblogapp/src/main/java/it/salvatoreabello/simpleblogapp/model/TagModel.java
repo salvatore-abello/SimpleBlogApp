@@ -1,7 +1,10 @@
 package it.salvatoreabello.simpleblogapp.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.List;
 
@@ -12,6 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class TagModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,5 +24,6 @@ public class TagModel {
     private String tagname;
 
     @ManyToMany(mappedBy = "tags")
-    private List<PostModel> posts;
+    @JsonIgnore
+    private List<PostModel> posts; // Is this even useful? idk
 }

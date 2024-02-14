@@ -3,6 +3,7 @@ package it.salvatoreabello.simpleblogapp.serviceImpl;
 import it.salvatoreabello.simpleblogapp.config.JWTUtil;
 import it.salvatoreabello.simpleblogapp.dto.PostDTO;
 import it.salvatoreabello.simpleblogapp.model.PostModel;
+import it.salvatoreabello.simpleblogapp.model.TagModel;
 import it.salvatoreabello.simpleblogapp.model.UserModel;
 import it.salvatoreabello.simpleblogapp.repository.IPostRepository;
 import it.salvatoreabello.simpleblogapp.repository.ITagRepository;
@@ -70,7 +71,7 @@ public class PostServiceImpl implements IPostService {
                 .tags(new ArrayList<>())
                 .build();
 
-        newPost.getTags().addAll(
+        newPost.getTags().addAll( // :think:
                 post.getTags()
                         .stream()
                         .map(t -> {
@@ -80,14 +81,9 @@ public class PostServiceImpl implements IPostService {
                                 throw new RuntimeException(e);
                             }
                         })
-                        .peek(tt -> tt.getPosts().add(newPost))
-                        .toList()
-        );
-
-
+                        .collect(Collectors.toSet()));
 
         PostModel savedPost = repository.save(newPost);
-
         return modelMapper.map(savedPost, PostDTO.class);
     }
 

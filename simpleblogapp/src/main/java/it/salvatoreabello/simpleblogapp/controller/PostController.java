@@ -3,6 +3,7 @@ package it.salvatoreabello.simpleblogapp.controller;
 import it.salvatoreabello.simpleblogapp.config.APIResponse;
 import it.salvatoreabello.simpleblogapp.config.JWTUtil;
 import it.salvatoreabello.simpleblogapp.dto.PostDTO;
+import it.salvatoreabello.simpleblogapp.dto.TagDTO;
 import it.salvatoreabello.simpleblogapp.service.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,8 +13,11 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.transform.OutputKeys;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/posts")
@@ -112,7 +116,17 @@ public class PostController {
     public ResponseEntity<APIResponse<PostDTO>> createPost(@RequestBody @Validated PostDTO post) throws Exception {
         APIResponse.APIResponseBuilder<PostDTO> builder = APIResponse.builder();
 
-        PostDTO createdPost = postService.saveOrUpdate(post);
+        if(post.getTags().size() > 5){
+            throw new Exception("A post can have a maximum of 5 tags");
+        }
+
+        PostDTO postWithoutDuplicates = PostDTO.builder()
+                .title(post.getTitle())
+                .content(post.getContent())
+                .tags(new ArrayList<>(new HashSet<>(post.getTags())))
+                .build();
+
+        PostDTO createdPost = postService.saveOrUpdate(postWithoutDuplicates);
         builder.statusCode(HttpStatus.OK.value());
 
         if(createdPost != null){
