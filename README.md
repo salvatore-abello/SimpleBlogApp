@@ -37,7 +37,7 @@
   - [x] Ricerca di una parola (o frase) nei post (found, not found)
   - [ ] Possibilità di cambiare password
   - [x] Creazione di un post
-       - [x] Aggiungere qualcosa per cacheare le tag (non cambiano, quindi che senso ha prenderle di continuo dal db?)
+       - [x] Aggiungere qualcosa per cacheare i tag (non cambiano, quindi che senso ha prenderi di continuo dal db?)
   - [ ] Possibilità di switchare tra prod e dev
   - [ ] **ABILITARE CSRF PROTECTION** (dopo aver finito il frontend)
   - [ ] **Fase di testing**
