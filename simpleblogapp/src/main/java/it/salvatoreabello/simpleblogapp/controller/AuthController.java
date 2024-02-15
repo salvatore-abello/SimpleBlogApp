@@ -113,4 +113,26 @@ public class AuthController {
         APIResponse<String> response = builder.build();
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @PostMapping(value = "/changepassword",
+            produces = {MediaType.APPLICATION_JSON_VALUE},
+            consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<APIResponse<String>> changePassword(@RequestBody Map<String, Object> json) throws Exception {
+        APIResponse.APIResponseBuilder<String>builder = APIResponse.builder();
+
+        String newPassword = (String) json.get("newPassword");
+        String currentPassword = (String) json.get("currentPassword");
+
+        userService.changePassword(currentPassword, newPassword);
+
+        builder
+                .statusCode(HttpStatus.OK.value())
+                .statusMessage("Password changed correctly")
+                .returnedObjects(1)
+                .totalObjects(1)
+                .payload("Password changed correctly");
+
+        APIResponse<String> response = builder.build();
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
 }

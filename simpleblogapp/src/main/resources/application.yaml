@@ -5,6 +5,9 @@ spring:
     password: salvatore05
     url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/blog
 
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+
   jpa:
     hibernate:
       ddl-auto: update

@@ -1,5 +1,6 @@
 package it.salvatoreabello.simpleblogapp.serviceImpl;
 
+import it.salvatoreabello.simpleblogapp.config.JWTUtil;
 import it.salvatoreabello.simpleblogapp.dto.UserDTO;
 import it.salvatoreabello.simpleblogapp.model.UserModel;
 import it.salvatoreabello.simpleblogapp.repository.IUserRepository;
@@ -28,6 +29,9 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private JWTUtil jwt;
 
     @Override
     public List<UserDTO> getAll() {
@@ -74,6 +78,25 @@ public class UserServiceImpl implements IUserService {
     public UserDTO saveOrUpdate(UserModel entity) throws MethodArgumentNotValidException {
         this.setEncodedPassword(entity);
         return modelMapper.map(repository.save(entity), UserDTO.class);
+    }
+
+    @Override
+    public void changePassword(String currentPassword,
+                                  String newPassword) throws Exception {
+
+        UserModel currentUser = repository.findById(
+                jwt.getCurrentUser()
+                        .getId())
+                .orElseThrow(() -> new Exception("Unexpected error"));
+
+
+        if(!passwordEncoder.matches(currentPassword, currentUser.getPassword()))
+            throw new Exception("Wrong password");
+
+        currentUser.setPassword(newPassword);
+        this.setEncodedPassword(currentUser);
+
+        repository.save(currentUser);
     }
 
     public Boolean login(UserModel entityFromReq, UserModel entityFromDb) {

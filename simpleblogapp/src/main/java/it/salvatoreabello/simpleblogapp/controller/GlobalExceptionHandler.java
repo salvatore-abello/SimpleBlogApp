@@ -65,7 +65,7 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
                 APIResponse.<UserDTO>builder()
                         .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                        .statusMessage("Internal server error while registering user")
+                        .statusMessage("Internal server error")
                         .returnedObjects(0)
                         .totalObjects(0)
                         .errors(

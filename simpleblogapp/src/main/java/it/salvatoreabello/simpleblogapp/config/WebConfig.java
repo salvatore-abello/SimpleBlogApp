@@ -27,9 +27,7 @@ public class WebConfig implements WebMvcConfigurer {
         @Bean
         public CacheManager cacheManager() {
             return new ConcurrentMapCacheManager("tags");
-        }
-
-    }
+        }}
 
     @Override
     public void addCorsMappings(CorsRegistry registry){

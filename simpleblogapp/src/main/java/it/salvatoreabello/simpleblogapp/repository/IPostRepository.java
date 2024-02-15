@@ -14,7 +14,7 @@ public interface IPostRepository extends JpaRepository<PostModel, Integer> {
     // https://stackoverflow.com/questions/33438483/spring-data-jpa-query-manytomany
     List<PostModel> findByTagsTagnameIn(@Param("tagnames") List<String> tagnames);
 
-    // I don't know if it's possible doing this using only that method name
+    // I don't know if it's possible doing this using only method names
     @Query("select p from PostModel p inner join p.tags tags " +
             "where (:tagnames is null or tags.tagname in :tagnames) " +
             "and (:ownerid is null or p.owner.id = :ownerid) " +

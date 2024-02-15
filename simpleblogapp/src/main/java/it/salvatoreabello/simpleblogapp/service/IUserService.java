@@ -10,7 +10,8 @@ import java.util.List;
 public interface IUserService {
     List<UserDTO> getAll();
     UserDTO findById(Integer id);
-    UserModel findByEmail(String email);
+    UserModel findByEmail(String email); // only used during login
+    void changePassword(String currentPassword, String newPassword) throws Exception;
     UserDTO saveOrUpdate(UserModel entity) throws MethodArgumentNotValidException;
     Boolean login(UserModel entityFromReq, UserModel entityFromDb);
     void setEncodedPassword(UserModel entity) throws MethodArgumentNotValidException;
