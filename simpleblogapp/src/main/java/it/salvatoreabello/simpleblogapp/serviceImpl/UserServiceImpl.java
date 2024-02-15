@@ -37,7 +37,10 @@ public class UserServiceImpl implements IUserService {
     public List<UserDTO> getAll() {
         return repository.findAll(Sort.by(Sort.Order.desc("id")))
                 .stream()
-                .map(m -> modelMapper.map(m, UserDTO.class))
+                .map(m -> {
+                    m.setPosts(null);
+                    return modelMapper.map(m, UserDTO.class);
+                })
                 .collect(Collectors.toList());
     }
     @Override
