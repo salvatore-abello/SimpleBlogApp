@@ -35,7 +35,7 @@
      - [x] In base all'owner del post
   - [x] Ottenere il singolo post dal suo ID
   - [x] Ricerca di una parola (o frase) nei post (found, not found)
-  - [ ] Possibilità di cambiare password
+  - [x] Possibilità di cambiare password
   - [x] Creazione di un post
        - [x] Aggiungere qualcosa per cacheare i tag (non cambiano, quindi che senso ha prenderi di continuo dal db?)
   - [ ] Possibilità di switchare tra prod e dev
