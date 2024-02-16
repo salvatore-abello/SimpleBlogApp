@@ -38,9 +38,9 @@
   - [x] Possibilità di cambiare password
   - [x] Creazione di un post
        - [x] Aggiungere qualcosa per cacheare i tag (non cambiano, quindi che senso ha prenderi di continuo dal db?)
-  - [ ] Possibilità di switchare tra prod e dev
+  - [x] Possibilità di switchare tra prod e dev
   - [x] **ABILITARE CSRF PROTECTION** (dopo aver finito il frontend)
-  - [x] **Fase di testing**
+  - [ ] **Fase di testing**
 
 - [ ] Realizzare il **frontend**
   - [ ] Boh, da decidere appena finisco il backend
