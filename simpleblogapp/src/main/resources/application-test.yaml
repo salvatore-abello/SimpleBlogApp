@@ -1,9 +1,10 @@
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: salvatore05
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/blog
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/test_blog
 
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
@@ -14,9 +15,17 @@ spring:
     show-sql: 'true'
 
   profiles:
-    active: prod
-  port: 1337 # Change this, just for testing purposes
+    port: 1337 # Change this, just for testing purposes
 
-jwt:
-  secret: changeme
-  expiration: 24 # Hours
+  jwt:
+    secret: testtoken
+    expiration: 1 # Hours
+
+
+logging:
+  level:
+    org:
+      hibernate:
+        orm:
+          jdbc:
+            bind: trace

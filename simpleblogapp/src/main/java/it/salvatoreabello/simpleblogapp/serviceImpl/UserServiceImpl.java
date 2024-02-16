@@ -11,6 +11,8 @@ import org.springframework.core.MethodParameter;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -49,6 +51,7 @@ public class UserServiceImpl implements IUserService {
         return repository.findByEmail(email);
     }
     @Override
+    @Transactional(propagation= Propagation.REQUIRED, readOnly=true, noRollbackFor=Exception.class)
     public UserDTO findById(Integer id) {
         if (id == null) return null;
         Optional<UserModel> userOptional = repository.findById(id);

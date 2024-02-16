@@ -33,7 +33,7 @@ public class AuthController {
     @Autowired
     JWTUtil jwt;
 
-    @GetMapping(value = "/csrf",
+    /*@GetMapping(value = "/csrf",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<APIResponse<String>> getCsrfToken(HttpServletRequest request){
@@ -48,7 +48,7 @@ public class AuthController {
                         .payload(csrfToken.getToken())
                         .build()
         );
-    }
+    }*/
 
     @PostMapping(value = "/register",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
