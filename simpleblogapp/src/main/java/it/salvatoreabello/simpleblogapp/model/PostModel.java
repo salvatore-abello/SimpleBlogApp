@@ -8,6 +8,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.List;
 
+@ToString
 @Setter
 @Getter
 @Entity
@@ -41,5 +42,6 @@ public class PostModel {
     )
 
     @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    @ToString.Exclude
     private List<TagModel> tags;
 }

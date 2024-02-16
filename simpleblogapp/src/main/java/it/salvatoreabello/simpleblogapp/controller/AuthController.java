@@ -7,11 +7,15 @@ import it.salvatoreabello.simpleblogapp.config.JWTUtil;
 import it.salvatoreabello.simpleblogapp.dto.UserDTO;
 import it.salvatoreabello.simpleblogapp.model.UserModel;
 import it.salvatoreabello.simpleblogapp.service.IUserService;
+import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -29,12 +33,28 @@ public class AuthController {
     @Autowired
     JWTUtil jwt;
 
+    @GetMapping(value = "/csrf",
+            consumes = {MediaType.APPLICATION_JSON_VALUE},
+            produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<APIResponse<String>> getCsrfToken(HttpServletRequest request){
+        CsrfToken csrfToken = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+                APIResponse.<String>builder()
+                        .statusCode(HttpStatus.OK.value())
+                        .statusMessage("CSRF token fetched correctly")
+                        .returnedObjects(1)
+                        .totalObjects(1)
+                        .payload(csrfToken.getToken())
+                        .build()
+        );
+    }
+
     @PostMapping(value = "/register",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<APIResponse<UserDTO>> registerUser(@RequestBody @Validated UserModel entity) throws MethodArgumentNotValidException {
         try {
-
             UserDTO registeredUser = userService.saveOrUpdate(entity);
 
             return ResponseEntity.status(HttpStatus.CREATED).body(
@@ -80,6 +100,7 @@ public class AuthController {
         String password = (String) json.get("password");
 
         UserModel fromDb = userService.findByEmail(email);
+
         UserModel fromReq = UserModel.builder()
                 .email(email)
                 .password(password)

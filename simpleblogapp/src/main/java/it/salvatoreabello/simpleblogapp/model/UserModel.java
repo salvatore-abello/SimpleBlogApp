@@ -9,6 +9,7 @@ import lombok.*;
 
 import java.util.List;
 
+@ToString
 @Setter
 @Getter
 @Entity
@@ -39,6 +40,7 @@ public class UserModel {
     private String password;
 
     @OneToMany(mappedBy = "owner")
+    @ToString.Exclude
     private List<PostModel> posts;
 
 }

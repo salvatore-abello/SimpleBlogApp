@@ -12,12 +12,9 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: 'true'
-
-
-  profiles:
-    active: prod
   port: 1337 # Change this, just for testing purposes
 
 jwt:
   secret: changeme
   expiration: 24 # Hours
+

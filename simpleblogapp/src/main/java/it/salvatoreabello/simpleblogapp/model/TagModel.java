@@ -8,6 +8,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import java.util.List;
 
+@ToString
 @Getter
 @Setter
 @Entity
@@ -25,5 +26,6 @@ public class TagModel {
 
     @ManyToMany(mappedBy = "tags")
     @JsonIgnore
+    @ToString.Exclude
     private List<PostModel> posts; // Is this even useful? idk
 }

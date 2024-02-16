@@ -1,6 +1,10 @@
 package it.salvatoreabello.simpleblogapp.config;
 
 import it.salvatoreabello.simpleblogapp.filter.JWTFilter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -12,6 +16,11 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.csrf.*;
+import org.springframework.web.filter.OncePerRequestFilter;
+
+import java.io.IOException;
 
 
 @Configuration
@@ -21,6 +30,9 @@ public class SecurityConfig {
     private String secretKey;
     @Value("${jwt.expiration}")
     private Integer exphours;
+
+    @Value("${spring.profiles.active}")
+    private String currentProfile;
     @Bean
     public JWTUtil jwtUtil() {
         return new JWTUtil(secretKey, exphours);
@@ -40,13 +52,24 @@ public class SecurityConfig {
         return registrationBean;
     }
 
-    // We don't need csrf protection (for now)
+    // csrf protection activated only on production
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-        return httpSecurity
-                .csrf(AbstractHttpConfigurer::disable)
-                .build();
-    }
+        if(currentProfile.equals("prod")){
+            CookieCsrfTokenRepository tokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse();
+            CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
 
+            return httpSecurity
+                    .csrf((csrf) -> csrf
+                            .csrfTokenRepository(tokenRepository)
+                            .csrfTokenRequestHandler(requestHandler)
+                    )
+                    .build();
+        }else{
+            return httpSecurity
+                    .csrf(AbstractHttpConfigurer::disable)
+                    .build();
+        }
+    }
 
 }
