@@ -14,7 +14,7 @@ spring:
     show-sql: 'true'
 
   profiles:
-    active: prod
+    active: dev
   port: 1337 # Change this, just for testing purposes
 
 jwt:

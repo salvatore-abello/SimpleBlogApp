@@ -53,8 +53,16 @@ public class UserServiceTests {
     private MockMvc mvc;
 
     @BeforeEach
-    public void setupAndTestSaveOrUpdate() {
+    public void setupAndTestSaveOrUpdate() throws MethodArgumentNotValidException {
         String email, password, name, surname;
+
+        // Used to create posts
+        userService.saveOrUpdate(UserModel.builder()
+                .name("admin")
+                .surname("admin")
+                .email("admin@test.com")
+                .password("adminpassword")
+                .build());
 
         for(int i = 0; i < ITERATIONS; i++){
             email = testPrefix + i + "@test.com";
@@ -108,7 +116,7 @@ public class UserServiceTests {
     public void testFindById(){
         UserDTO user;
         for(int i = 0; i < ITERATIONS; i++){
-            user = userService.findById(i + 1);
+            user = userService.findById(i + 2); // Because we added admin before
             assertEquals(user.getName(), testPrefix);
             assertEquals(user.getSurname(), testPrefix);
         }
@@ -137,7 +145,6 @@ public class UserServiceTests {
                             .characterEncoding("utf-8"))
                     .andExpect(status().isOk())
                     .andReturn();
-
 
             HashMap<String, Object> map = objectMapper
                     .readValue(result.getResponse().getContentAsString(), new TypeReference<HashMap<String,Object>>(){});

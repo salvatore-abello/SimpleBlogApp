@@ -41,7 +41,6 @@ public class JWTFilter implements Filter {
             String jwtToken = jwt.extractJwtToken(request);
 
             System.out.println("******** DONE ********");
-
             if (!StringUtils.hasText(jwtToken) || jwt.getJWT(jwtToken).getSubject() == null)
                 throw new JwtException("Unauthorized");
 

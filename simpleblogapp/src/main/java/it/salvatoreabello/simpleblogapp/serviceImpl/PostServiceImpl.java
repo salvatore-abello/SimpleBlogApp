@@ -12,6 +12,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +47,7 @@ public class PostServiceImpl implements IPostService {
 
     @Override
     public List<PostDTO> getAll() {
-        return repository.findAll(Sort.by(Sort.Order.desc("title")))
+        return repository.findAll()
                 .stream()
                 .map(m -> modelMapper.map(m, PostDTO.class))
                 .collect(Collectors.toList());

@@ -32,7 +32,9 @@ public class PostController {
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<APIResponse<List<PostDTO>>> getAllPosts(){
         APIResponse.APIResponseBuilder<List<PostDTO>> builder = APIResponse.builder();
+        System.out.println("FETCHING POSTS ***************");
         List<PostDTO> posts = postService.getAll();
+        System.out.println("DONEEEEEEEEEEEEEEEEEEEEEEEe ***************");
         builder.statusCode(HttpStatus.OK.value());
 
         if(!posts.isEmpty()){
