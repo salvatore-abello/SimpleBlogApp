@@ -2,7 +2,7 @@
  Semplice blog realizzato utilizzando Spring e Angular
 
 ## TODO
-- [ ] Realizzare il **backend**
+- [x] Realizzare il **backend**
   - [x] Ottenere tutti i post e utenti
   - [x] Ottenere tutti i post di un determinato utente (post + informazioni sull'utente)
   - [x] Ottenere tutti i post con un determinato/i tag
@@ -40,7 +40,7 @@
        - [x] Aggiungere qualcosa per cacheare i tag (non cambiano, quindi che senso ha prenderi di continuo dal db?)
   - [x] Possibilità di switchare tra prod e dev
   - [x] **ABILITARE CSRF PROTECTION** (dopo aver finito il frontend)
-  - [ ] **Fase di testing**
+  - [x] **Fase di testing**
 
 - [ ] Realizzare il **frontend**
   - [ ] Boh, da decidere appena finisco il backend
@@ -50,5 +50,6 @@
   - [ ] Chi crea i tag? Probabilmente l'admin. Potrebbe essere carino implementare sta roba
   - [ ] Eliminare post? In base a cosa? Probabilmente no
   - [ ] Docker?
+  - [ ] Capire perché /api/posts ci mette più di 5 secondi a mandare solo 200 post
 
 Probabilmente c'è roba che fa veramente schifo, questo è il mio primo esercizio con Java e Angular.
