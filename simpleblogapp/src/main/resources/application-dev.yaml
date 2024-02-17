@@ -18,3 +18,17 @@ jwt:
   secret: changeme
   expiration: 24 # Hours
 
+logging:
+  level:
+    root: DEBUG
+    it:
+      salvatoreabello: DEBUG
+    org:
+      hibernate:
+        stat: debug
+        SQL_SLOW: info
+        SQL: debug
+        cache: debug
+        orm:
+          jdbc:
+            bind: trace
