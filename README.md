@@ -50,6 +50,6 @@
   - [ ] Chi crea i tag? Probabilmente l'admin. Potrebbe essere carino implementare sta roba
   - [ ] Eliminare post? In base a cosa? Probabilmente no
   - [ ] Docker?
-  - [ ] Capire perché /api/posts ci mette più di 5 secondi a mandare solo 200 post
+  - [ ] **Rendere il backend più veloce**
 
 Probabilmente c'è roba che fa veramente schifo, questo è il mio primo esercizio con Java e Angular.
